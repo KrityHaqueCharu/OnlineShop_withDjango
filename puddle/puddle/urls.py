@@ -21,9 +21,9 @@ from core.views import index,contact
 from item.views import detail
 
 urlpatterns = [
-    path('', index, name='index'),
+    path('', include('core.urls')),
     path('admin/', admin.site.urls),
-    path('contact/',contact,name='contact'),
     # path('detail/<int:id>',detail,name='detail'),
-    path('items/', include('item.urls')),
+    path('', include('item.urls')),
+    path('dashboard/', include('dashboard.urls')),
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT) #this is for showing the picture
