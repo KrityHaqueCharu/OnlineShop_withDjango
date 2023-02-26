@@ -26,4 +26,5 @@ urlpatterns = [
     # path('detail/<int:id>',detail,name='detail'),
     path('', include('item.urls')),
     path('dashboard/', include('dashboard.urls')),
+    path('inbox/', include('conversation.urls')),
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT) #this is for showing the picture
