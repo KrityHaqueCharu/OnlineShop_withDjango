@@ -27,15 +27,23 @@
                     Edit</a>
                     <a href="{% url 'item:delete' item.id %}" class="inline-block mt-6 px-6 text-lg font-semibold bg-red-500 text-white rounded-xl">
                 </div>Delete</a>
+                <div>
+                </div>
             {% else %}
-                <br><a href="{% url 'conversation:new_conversation' item.id %}" class='px-5 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700 shadow-cyan-500/50'>Contact Seller</a>
+                <br><a href="{% url 'conversation:new_conversation' item.id %}" class='px-5 mt-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700 shadow-cyan-500/50'>Contact Seller</a>
+                {% comment %} <form method="post" action="{% url 'item:add_to_cart' item.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Add to Cart</button>
+                </form> {% endcomment %}
+                <br><a href="{% url 'item:add_to_cart' item.id %}" class='px-5 mt-6 inline-block py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700 shadow-cyan-500/50'>Add to Cart</a>
+
             {% endif %}
         </div><br>
        
         </div>
 <br>
         <div class='mt-6 px-6 py-12 bg-gray-100 flex-auto rounded-xl'>
-            <h2 class='mb-12 text-2xl text-center'>Related Items Items</h2>
+            <h2 class='mb-12 text-2xl text-center'>Related Items</h2>
         
             <div class='grid gap-3'>
                

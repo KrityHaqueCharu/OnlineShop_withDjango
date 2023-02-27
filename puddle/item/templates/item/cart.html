@@ -1,0 +1,22 @@
+{% extends 'core/base.html' %}
+
+
+
+{% block title %}
+    Your Cart
+{% endblock title %}
+    
+
+
+{% block content %}
+{% for cart_item in cart_items %}
+<div>
+    <h3>{{ cart_item.item.name }}</h3>
+    <p>Price: {{ cart_item.item.price }}</p>
+    <p>Quantity: {{ cart_item.quantity }}</p>
+    {% comment %} <p>Total Price: {{ cart_item.quantity }} x {{ cart_item.item.price|floatformat:2 }} = ${{ cart_item.quantity|mul:cart_item.item.price|floatformat:2 }}</p> {% endcomment %}
+</div>
+{% endfor %}
+{% endblock content %}
+    
+

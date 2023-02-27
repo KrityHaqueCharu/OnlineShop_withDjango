@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from item.models import Category, Item
+from item.models import Category, Item, Cart
 from django.contrib.auth.decorators import login_required
 from .forms import NewItemForm,EditItemForm
 # Create your views here.
@@ -75,3 +75,20 @@ def edit(request, id):
         'title': 'Edit Item'
     }
     return render(request, 'item/form.html',context)
+
+from django.shortcuts import get_object_or_404, redirect
+
+def add_to_cart(request, id):
+    item = get_object_or_404(Item, id=id)
+    cart_item, created = Cart.objects.get_or_create(user=request.user, item=item, defaults={'quantity': 1})
+    
+    if not created:
+        cart_item.quantity += 1
+        cart_item.save()
+    
+    return redirect('item:view_cart')
+
+def view_cart(request):
+    cart_items = Cart.objects.filter(user=request.user)
+    context = {'cart_items': cart_items}
+    return render(request, 'item/cart.html', context)
