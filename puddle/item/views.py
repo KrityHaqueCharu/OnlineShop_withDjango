@@ -92,3 +92,29 @@ def view_cart(request):
     cart_items = Cart.objects.filter(user=request.user)
     context = {'cart_items': cart_items}
     return render(request, 'item/cart.html', context)
+
+def increase(request,id):
+    cart_item = Cart.objects.get(id=id)
+    cart_item.quantity += 1
+    cart_item.save()
+
+    return redirect('item:view_cart')
+
+def decrease(request, id):
+    cart_item = get_object_or_404(Cart, id=id)
+    # cart_item.quantity -= 1
+    # cart_item.save()
+    if cart_item.quantity > 1:
+        print(cart_quantity)
+        cart_item.quantity -= 1
+        cart_item.save()
+    else:
+        cart_item.delete()
+
+    return redirect('item:view_cart')
+
+
+def remove_from_cart(request, id):
+    cart_item = get_object_or_404(Cart, id=id, user=request.user) #shudhur id pelei hobe na, oi user o pawa lagbe
+    cart_item.delete()
+    return redirect('item:view_cart')
