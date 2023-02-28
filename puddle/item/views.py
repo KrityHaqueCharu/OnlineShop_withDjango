@@ -87,7 +87,7 @@ def add_to_cart(request, id):
         cart_item.save()
     
     return redirect('item:view_cart')
-
+@login_required
 def view_cart(request):
     cart_items = Cart.objects.filter(user=request.user)
     context = {'cart_items': cart_items}
@@ -105,7 +105,7 @@ def decrease(request, id):
     # cart_item.quantity -= 1
     # cart_item.save()
     if cart_item.quantity > 1:
-        print(cart_quantity)
+        print(cart_item.quantity)
         cart_item.quantity -= 1
         cart_item.save()
     else:
